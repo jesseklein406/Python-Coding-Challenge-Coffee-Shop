@@ -103,7 +103,7 @@ class Shelf(object):
         quantity -- integer number of coffee bags to sell, default is 1
         """
         if self.inventory - quantity < 0:
-            raise ValueError("You are out of stock")
+            raise ValueError("You do not have that many bags")
         else:
             wants_ground = random.randrange(2)   # randomly choose 0 or 1
             if wants_ground:
@@ -138,7 +138,7 @@ class Grinder(object):
         Keyword arguments:
         quantity -- integer number of coffee bags to grind, default is 1
         """
-        if self.grinds_since_service >= 20:   # do not complete sale for grind requests
+        if self.grinds_since_service + quantity > 20:   # do not complete sale for grind requests
             raise ValueError("Grinder needs service")
         else:
             self.grinds_since_service += quantity
